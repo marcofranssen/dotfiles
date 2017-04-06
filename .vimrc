@@ -20,3 +20,11 @@ filetype plugin indent on
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+set autoindent
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
