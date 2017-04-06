@@ -23,7 +23,7 @@ if [ -e "$HOME/.vimrc" ] ; then
   response=${response,,}
   if [[ "$response" =~ ^(yes|y)$ ]] ; then
     mv temp/.vimrc ~/.vimrc
-    echo Your existing .vimrc
+    echo Updated your existing .vimrc
   else
     echo Your existing .vimrc was kept.
   fi
