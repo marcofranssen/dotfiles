@@ -1,3 +1,6 @@
+" enable project specific .vimrc
+set exrc
+
 set nocompatible
 filetype off
 
@@ -28,3 +31,6 @@ set softtabstop=4
 set tabstop=4
 
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
+" disable unsafe commands from project specific .vimrc
+set secure
