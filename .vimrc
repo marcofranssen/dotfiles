@@ -9,6 +9,9 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'flazz/vim-colorschemes'
+
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
@@ -23,6 +26,11 @@ filetype plugin indent on
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" Syntax highlighting + color scheme
+syntax on
+set t_Co=256
+colorscheme jellybeans
 
 set autoindent
 set expandtab
