@@ -1,16 +1,29 @@
 #!/bin/bash
 
+function info() {
+  echo $(tput setaf 3)$@$(tput sgr0)
+}
+
 echo 'Cloning Vundle...'
-git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+if [ -d "$HOME/.vim/bundle/Vundle.vim" ] ; then
+  pushd $HOME/.vim/bundle/Vundle.vim > /dev/null
+  git pull --quiet
+  popd > /dev/null
+else
+  git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
 
 echo 'Put in place .vimrc config...'
-mkdir temp
+mkdir -p temp
 curl -sSo temp/.vimrc https://raw.githubusercontent.com/marcofranssen/dotfiles/master/.vimrc
 
 if [ -e "$HOME/.vimrc" ] ; then
-  echo Please take a look at the following diff to decide if you want to overwrite your existing .vimrc
-  git diff ~/.vimrc temp/.vimrc 
-  read -r -p "Do you want to replace the .vimrc file at $HOME/.vimrc? [y/N] " response
+  echo
+  read -r -p "$(tput setaf 3)Please take a look at the following diff to decide if you want to overwrite your existing .vimrc$(tput sgr0)"
+  echo
+  git diff ~/.vimrc temp/.vimrc
+  echo
+  read -r -p "$(tput setaf 3)Do you want to replace the .vimrc file at $HOME/.vimrc?$(tput sgr0) [y/N] " response
   response=${response,,}
   if [[ "$response" =~ ^(yes|y)$ ]] ; then
     mv temp/.vimrc ~/.vimrc
@@ -18,7 +31,6 @@ if [ -e "$HOME/.vimrc" ] ; then
   else
     echo Your existing .vimrc was kept.
   fi
-
 else
   mv temp/.vimrc ~/.vimrc
 fi
