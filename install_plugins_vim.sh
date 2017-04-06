@@ -1,9 +1,5 @@
 #!/bin/bash
 
-function info() {
-  echo $(tput setaf 3)$@$(tput sgr0)
-}
-
 echo 'Cloning Vundle...'
 if [ -d "$HOME/.vim/bundle/Vundle.vim" ] ; then
   pushd $HOME/.vim/bundle/Vundle.vim > /dev/null
