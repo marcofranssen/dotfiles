@@ -1,0 +1,38 @@
+[alias]
+  bw = blame -w -M
+  c = commit
+  commend = commit --amend --no-edit
+  cc = commit --all --amend --no-edit
+  ca = commit --all
+  co = checkout
+  cb = "!f() { git checkout `git log --until=\"$*\" -1 --format=%h`; } ; f"
+  s = status --short
+  d = diff
+  dc = diff --cached --word-diff=color
+  dw = diff --word-diff=color
+  l = log
+  a = add
+  af = add -f
+  p = push
+  ss = show -1 --format=%B--stat
+  sw = show -1 --format=%B--stat --word-diff=color
+  whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+  lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s [%N] %Cgreen(%ar)%Creset' --date=relative
+  lgd = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s [%N] %Cgreen(%ar)%Creset' --date=default
+  lgm = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s [%N] %Cgreen(%ar)%Creset' --date=relative --author=AUTHOR_EMAIL
+  abbr = "!sh -c 'git rev-list --all | grep ^$1 | while read commit; do git --no-pager log -n1 --pretty=format:\"%H %ci %an %s%n\" $commit; done' -"
+[color]
+  ui = always
+[core]
+  pager = less -x1,5
+  fileMode = true
+  editor = vim
+  autocrlf = false
+[push]
+  default = current
+[branch]
+  autosetuprebase = remote
+[merge]
+  tool = vimdiff
+[diff]
+  guitool = vimdiff
