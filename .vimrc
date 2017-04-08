@@ -33,6 +33,10 @@ syntax on
 set t_Co=256
 colorscheme jellybeans
 
+set cul
+set number
+set laststatus=2
+
 set autoindent
 set expandtab
 set shiftwidth=4
