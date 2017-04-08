@@ -34,6 +34,10 @@ syntax on
 set t_Co=256
 colorscheme jellybeans
 
+" makes sure we don't lose history when switching buffers
+" http://stackoverflow.com/a/2732336
+set hidden
+
 set hlsearch
 set incsearch
 
