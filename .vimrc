@@ -13,6 +13,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
@@ -58,6 +59,11 @@ au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 " column 'F' with 'n', so that it really shows up as a margin
 set highlight=Fn
 set foldcolumn=5
+
+" Configure nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+
 
 " disable unsafe commands from project specific .vimrc
 set secure
