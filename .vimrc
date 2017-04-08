@@ -14,6 +14,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
@@ -64,6 +65,18 @@ set foldcolumn=5
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 
+" Syntastic configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" remove trailing whitespace on save
+autocmd FileType java,php,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " disable unsafe commands from project specific .vimrc
 set secure
