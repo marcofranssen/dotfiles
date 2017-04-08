@@ -11,6 +11,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
@@ -44,6 +45,11 @@ set softtabstop=4
 set tabstop=4
 
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
+" give us some left margin (also disable highlighting for the fold
+" column 'F' with 'n', so that it really shows up as a margin
+set highlight=Fn
+set foldcolumn=5
 
 " disable unsafe commands from project specific .vimrc
 set secure
