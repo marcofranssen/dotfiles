@@ -41,6 +41,8 @@ colorscheme jellybeans
 " http://stackoverflow.com/a/2732336
 set hidden
 
+set mouse=a
+
 set hlsearch
 set incsearch
 
