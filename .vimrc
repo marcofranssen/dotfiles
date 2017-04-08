@@ -34,6 +34,9 @@ syntax on
 set t_Co=256
 colorscheme jellybeans
 
+set hlsearch
+set incsearch
+
 set cul
 set number
 set laststatus=2
