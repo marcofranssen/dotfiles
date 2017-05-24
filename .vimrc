@@ -81,11 +81,11 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:ctrlp_prompt_mappings = {
-  'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-  'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-  'AcceptSelection("e")': ['<c-t>'],
-  'AcceptSelection("v")': ['<c-v>', '<RightMouse>']
-}
+\ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+\ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+\ 'AcceptSelection("e")': ['<c-t>'],
+\ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+\ }
 
 " disable unsafe commands from project specific .vimrc
 set secure
