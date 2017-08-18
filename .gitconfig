@@ -14,6 +14,8 @@
   a = add
   af = add -f
   p = push
+  dt = difftool
+  mt = mergetool
   ss = show -1 --format=%B--stat
   sw = show -1 --format=%B--stat --word-diff=color
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
