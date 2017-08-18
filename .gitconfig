@@ -34,5 +34,12 @@
   autosetuprebase = remote
 [merge]
   tool = vimdiff
+  guitool = gvimdiff
+  conflictstyle = diff3
+[mergetool]
+  prompt = false
 [diff]
-  guitool = vimdiff
+  tool = vimdiff
+  guitool = gvimdiff
+[difftool]
+  prompt = false
