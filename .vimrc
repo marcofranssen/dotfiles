@@ -16,6 +16,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -56,10 +58,10 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
-au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType yaml,js,jsx setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
 " remove trailing whitespace on save
-autocmd FileType java,php,js,yaml,json,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType java,php,js,jsx,yaml,json,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " give us some left margin (also disable highlighting for the fold
 " column 'F' with 'n', so that it really shows up as a margin
@@ -74,6 +76,9 @@ let g:NERDTrimTrailingWhitespace = 1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
