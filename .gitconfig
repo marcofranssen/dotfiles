@@ -5,7 +5,7 @@
   cc = commit --all --amend --no-edit
   ca = commit --all
   co = checkout
-  cb = "!f() { git checkout `git log --until=\"$*\" -1 --format=%h`; } ; f"
+  cb = "!f() { git co `git log --until=\"$*\" -1 --format=%h`; } ; f"
   s = status --short
   d = diff
   dc = diff --cached --word-diff=color
