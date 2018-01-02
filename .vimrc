@@ -18,6 +18,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'plantuml-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
