@@ -93,5 +93,12 @@ let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
 \ }
 
+set wildignore+=*/node_modules/*,*.so,*.swp,*.zip
+
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+\ 'file': '\v\.(exe|so|dll)$',
+\ }
+
 " disable unsafe commands from project specific .vimrc
 set secure
