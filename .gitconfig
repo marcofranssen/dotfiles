@@ -25,6 +25,7 @@
   abbr = "!sh -c 'git rev-list --all | grep ^$1 | while read commit; do git --no-pager log -n1 --pretty=format:\"%H %ci %an %s%n\" $commit; done' -"
   refeature = "!f() { git co develop && git pull && git co $1 && git rebase develop; } ; f"
   ffmerge = "!f() { git refeature $1 && git co develop && git merge $1; } ; f"
+  clearbranch = "!f() { git branch -d $1 && git push origin :$1; } ; f"
 [color]
   ui = always
 [core]
