@@ -13,3 +13,4 @@ _ssh()
 }
 complete -F _ssh ssh
 complete -F _ssh scp
+complete -F _ssh ssh-copy-id
