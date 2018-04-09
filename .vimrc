@@ -68,6 +68,8 @@ autocmd FileType java,php,js,jsx,yaml,json,sh autocmd BufWritePre <buffer> :%s/\
 " column 'F' with 'n', so that it really shows up as a margin
 set highlight=Fn
 set foldcolumn=5
+set foldmethod=syntax
+set foldlevel=99
 
 " Configure nerdcommenter
 let g:NERDSpaceDelims = 1
