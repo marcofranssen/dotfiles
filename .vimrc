@@ -2,7 +2,6 @@
 set exrc
 
 set nocompatible
-filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -18,10 +17,13 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'fatih/vim-go'
 Plugin 'plantuml-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
+
+filetype on
 filetype plugin indent on
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
@@ -59,6 +61,9 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
+let mapleader=","
+let g:mapleader=","
+
 au FileType yaml,js,jsx setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
 " remove trailing whitespace on save
@@ -70,6 +75,24 @@ set highlight=Fn
 set foldcolumn=5
 set foldmethod=syntax
 set foldlevel=99
+
+" --------------------------------------------------------
+" Vim-go
+" --------------------------------------------------------
+au FileType go nmap <leader>s <Plug>(go-implements)
+au FileType go nmap <leader>i <Plug>(go-info)
+au FileType go nmap <leader>gd <Plug>(go-doc)
+au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>gb <Plug>(go-doc-browser)
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
 " Configure nerdcommenter
 let g:NERDSpaceDelims = 1
