@@ -27,6 +27,7 @@
   refeature = "!f() { git co develop && git pull && git co $1 && git pull && git rebase develop; } ; f"
   ffmerge = "!f() { git refeature $1 && git co develop && git merge $1; } ; f"
   clearbranch = "!f() { git branch -d $1 && git push origin :$1; } ; f"
+  please = push --force-with-lease
 [color]
   ui = always
 [core]
