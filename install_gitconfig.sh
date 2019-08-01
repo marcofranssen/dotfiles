@@ -38,6 +38,6 @@ if [ -e "$HOME/.gitconfig" ] ; then
     echo Your existing .gitconfig was kept.
   fi
 else
-  mv temp/.vimrc ~/.vimrc
+  mv temp/.gitconfig ~/.gitconfig
 fi
 rm -r temp
