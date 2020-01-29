@@ -50,3 +50,7 @@
   guitool = gvimdiff
 [difftool]
   prompt = false
+[commit]
+	gpgSign = true
+[tag]
+	forceSignAnnotated = true
