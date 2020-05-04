@@ -28,6 +28,8 @@
   ffmerge = "!f() { git refeature $1 && git co develop && git merge $1; } ; f"
   clearbranch = "!f() { git branch -d $1 && git push origin :$1; } ; f"
   please = push --force-with-lease
+  undo = restore
+  unstage = restore --staged
 [color]
   ui = always
 [core]
