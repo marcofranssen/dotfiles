@@ -58,5 +58,8 @@
 	gpgSign = true
 [tag]
 	forceSignAnnotated = true
+
+[includeIf "gitdir:~/code/priv/**/*"]
+    path = "~/.gitconfig-private"
 [init]
 	defaultBranch = main
