@@ -12,6 +12,7 @@
   dw = diff --word-diff=color
   l = log
   a = add
+  addnw = !sh -c 'git diff -U0 -w --no-color --ignore-blank-lines "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
   af = add -f
   p = push
   dt = difftool
