@@ -42,3 +42,4 @@ rm -r "${temp}"
 echo
 echo 'Installing Vundle plugins...'
 yes | vim +PluginInstall +qall >/dev/null 2>&1
+mkdir -p "${HOME}/.vim"

@@ -48,6 +48,9 @@ colorscheme xoria256
 " http://stackoverflow.com/a/2732336
 set hidden
 
+set noswapfile
+set directory=$HOME/.vim/swp//
+
 set mouse=a
 set backspace=indent,eol,start
 set clipboard=unnamed
