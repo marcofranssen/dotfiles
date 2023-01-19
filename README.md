@@ -14,3 +14,8 @@ curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_p
 curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_gitconfig.sh | bash
 ```
 
+## Configure gh cli
+
+```shell
+curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_ghconfig.sh | bash
+```
