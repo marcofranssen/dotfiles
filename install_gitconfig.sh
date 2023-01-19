@@ -2,7 +2,7 @@
 
 echo 'Put in place .gitconfig...'
 mkdir -p temp
-curl -sSo temp/.gitconfig https://raw.githubusercontent.com/marcofranssen/dotfiles/master/.gitconfig
+curl -sSo temp/.gitconfig https://raw.githubusercontent.com/marcofranssen/dotfiles/main/.gitconfig
 
 function set-git-user() {
   local git_user_name git_user_email

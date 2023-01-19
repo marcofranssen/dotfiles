@@ -11,7 +11,7 @@ fi
 
 echo 'Put in place .vimrc config...'
 mkdir -p temp
-curl -sSo temp/.vimrc https://raw.githubusercontent.com/marcofranssen/dotfiles/master/.vimrc
+curl -sSo temp/.vimrc https://raw.githubusercontent.com/marcofranssen/dotfiles/main/.vimrc
 
 if [ -e "$HOME/.vimrc" ]; then
   echo
