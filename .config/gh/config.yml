@@ -4,9 +4,14 @@ git_protocol: ssh
 editor: vim
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    bugs: issue list --label="bugs"
+    bugs: issue list --label bugs
+    enhancements: issue list --label enhancement
+    dep-updates: pr list --label dependencies
     workflows: |-
       !gh api /repos/:owner/:repo/actions/workflows
-    remove-failed-builds: '!gh list-failed-builds $1 | jq -r ".id" | xargs -t -I{} gh remove-workflow-run $1 {}'
-    list-failed-builds: '!gh api repos/$1/actions/runs --paginate | jq -r ".workflow_runs[] | select(.conclusion == \"failure\")"'
-    remove-workflow-run: '!gh api repos/$1/actions/runs/$2 -X DELETE >/dev/null'
+    list-failed-builds: |-
+      !gh api repos/:owner/:repo/actions/runs --paginate | jq -r ".workflow_runs[] | select(.conclusion == \"failure\")"
+    remove-failed-builds: |-
+      !gh list-failed-builds | jq -r ".id" | xargs -t -I{} gh remove-workflow-run {}
+    remove-workflow-run: |-
+      !gh api repos/:owner/:repo/actions/runs/$1 -X DELETE >/dev/null
