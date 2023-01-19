@@ -113,6 +113,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height=5
+" Better symbols
+let g:syntastic_error_symbol = 'XX'
+let g:syntastic_warning_symbol = '!!'
 
 let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
