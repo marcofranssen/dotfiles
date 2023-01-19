@@ -9,28 +9,36 @@ else
   git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
-echo 'Put in place .vimrc config...'
-mkdir -p temp
-curl -sSo temp/.vimrc https://raw.githubusercontent.com/marcofranssen/dotfiles/main/.vimrc
+vimrc=.vimrc
 
-if [ -e "$HOME/.vimrc" ]; then
+echo "Put in place $HOME/${vimrc} config..."
+temp="$(mktemp -d)"
+curl -sSo "${temp}/${vimrc}" https://raw.githubusercontent.com/marcofranssen/dotfiles/main/${vimrc}
+
+if [ -e "$HOME/${vimrc}" ]; then
   echo
-  read -r -p "$(tput setaf 3)Please take a look at the following diff to decide if you want to overwrite your existing .vimrc$(tput sgr0)"
-  echo
-  git diff ~/.vimrc temp/.vimrc
-  echo
-  read -r -p "$(tput setaf 3)Do you want to replace the .vimrc file at $HOME/.vimrc?$(tput sgr0) [y/N] " response
-  response=${response,,}
-  if [[ "$response" =~ ^(yes|y)$ ]]; then
-    mv temp/.vimrc ~/.vimrc
-    echo Updated your existing .vimrc
+  if git --no-pager diff --no-index --minimal "${HOME}/${vimrc}" "${temp}/${vimrc}" ; then
+    echo "${HOME}/${vimrc} is already in sync."
   else
-    echo Your existing .vimrc was kept.
+    echo
+    read -r -p "$(tput setaf 3)Do you want to replace the $HOME/${vimrc}?$(tput sgr0) [y/N] " response
+    # remove leading whitespace characters
+    response="${response#"${response%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    response="${response%"${response##*[![:space:]]}"}"
+
+    if [[ "$response" =~ ^(yes|y)$ ]]; then
+      mv "${temp}/${vimrc}" "${HOME}/${vimrc}"
+      echo "Updated your existing ${vimrc}"
+    else
+      echo "Your existing ${vimrc} was kept."
+    fi
   fi
 else
-  mv temp/.vimrc ~/.vimrc
+  mv "${temp}/${vimrc}" "${HOME}/${vimrc}"
 fi
-rm -r temp
+rm -r "${temp}"
 
+echo
 echo 'Installing Vundle plugins...'
 yes | vim +PluginInstall +qall >/dev/null 2>&1

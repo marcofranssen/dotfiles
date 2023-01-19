@@ -49,6 +49,7 @@ set hidden
 
 set mouse=a
 set backspace=indent,eol,start
+set clipboard=unnamed
 
 set hlsearch
 set incsearch
