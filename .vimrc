@@ -41,7 +41,8 @@ filetype plugin indent on
 " Syntax highlighting + color scheme
 syntax on
 set t_Co=256
-colorscheme jellybeans
+" colorscheme jellybeans
+colorscheme xoria256
 
 " makes sure we don't lose history when switching buffers
 " http://stackoverflow.com/a/2732336
