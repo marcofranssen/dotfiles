@@ -87,7 +87,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(macos kubectl helm docker terraform golang keychain gpg-agent sigstore zsh-autosuggestions aws direnv fzf nerdctl terraform-docs ansi-colors)
 
 zstyle :omz:plugins:keychain agents ssh,gpg
-zstyle :omz:plugins:keychain identities id_ed25519 id_rsa
+zstyle :omz:plugins:keychain identities id_ed25519 id_rsa EA0B37B819AFFBE6 196A5F57979D5CD2 E3F7058A53F6DF52
 
 source $ZSH/oh-my-zsh.sh
 
