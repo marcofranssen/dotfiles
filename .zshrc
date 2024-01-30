@@ -84,7 +84,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-plugins=(macos kubectl helm docker terraform golang keychain gpg-agent sigstore zsh-autosuggestions aws direnv nerdctl terraform-docs ansi-colors)
+plugins=(macos kubectl helm docker terraform golang keychain gpg-agent sigstore zsh-autosuggestions aws direnv fzf nerdctl terraform-docs ansi-colors)
 
 zstyle :omz:plugins:keychain agents ssh,gpg
 zstyle :omz:plugins:keychain identities id_ed25519 id_rsa
