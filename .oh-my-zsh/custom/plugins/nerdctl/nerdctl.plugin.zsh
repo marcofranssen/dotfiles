@@ -2,4 +2,6 @@
 # here will override ones with the same name in the main plugins directory.
 # See: https://github.com/ohmyzsh/ohmyzsh/wiki/Customization#overriding-and-adding-plugins
 
-source <(nerdctl completion zsh)
+if hash nerdctl 2>/dev/null; then
+  source <(nerdctl completion zsh)
+fi
