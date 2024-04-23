@@ -12,6 +12,6 @@ aliases:
     list-failed-builds: |-
       !gh api repos/:owner/:repo/actions/runs --paginate | jq -r ".workflow_runs[] | select(.conclusion == \"failure\")"
     remove-failed-builds: |-
-      !gh list-failed-builds | jq -r ".id" | xargs -t -I{} gh remove-workflow-run {}
+      !gh list-failed-builds | jq -r ".id" | xargs -t -P4 -I{} gh remove-workflow-run {}
     remove-workflow-run: |-
       !gh api repos/:owner/:repo/actions/runs/$1 -X DELETE >/dev/null
