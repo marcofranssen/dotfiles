@@ -9,12 +9,21 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export GO_PATH="$HOME/go"
 export PATH="$GO_PATH/bin:$PATH"
-export PATH="/usr/local/opt/ncurses/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH="/usr/homebrew/opt/ncurses/bin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/bash/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/marco/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # krew path
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$WASMTIME_HOME/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
