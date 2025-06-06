@@ -16,6 +16,10 @@ curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_p
 
 ## Configure git
 
+### Prerequisites
+
+- [delta](https://github.com/dandavison/delta)
+
 ```shell
 curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_gitconfig.sh | bash
 ```

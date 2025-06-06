@@ -36,10 +36,17 @@
 [color]
   ui = always
 [core]
-  pager = less -x1,5
+  pager = delta
   fileMode = true
   editor = vim
   autocrlf = false
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  dark = true
+  syntax-theme = "GitHub"
+  line-numbers = true
 [push]
   default = current
 [branch]
@@ -47,7 +54,7 @@
 [merge]
   tool = vimdiff
   guitool = gvimdiff
-  conflictstyle = diff3
+  conflictStyle = zdiff3
 [mergetool]
   prompt = false
 [diff]
