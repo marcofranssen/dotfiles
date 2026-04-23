@@ -1,20 +1,46 @@
 -- Mason registry package names
 local mason_packages = {
   -- Language servers
+  "bash-language-server",
+  "buf",
+  "css-lsp",
+  "dockerfile-language-server",
   "gopls",
+  "graphql-language-service-cli",
+  "html-lsp",
+  "json-lsp",
   "lua-language-server",
+  "postgres-language-server",
+  "rust-analyzer",
+  "tailwindcss-language-server",
+  "tofu-ls",
+  "vtsls",
+  "yaml-language-server",
   -- LSP-based linters
+  "eslint-lsp",
   "golangci-lint-langserver",
   -- Formatters
   "goimports",
+  "markdownlint",
+  "prettierd",
   "stylua",
 }
 
 -- lspconfig server names to activate
 local lsp_servers = {
+  "bashls",
+  "cssls",
+  "dockerls",
+  "eslint",
   "golangci_lint_ls",
   "gopls",
+  "html",
+  "jsonls",
   "lua_ls",
+  "rust_analyzer",
+  "tailwindcss",
+  "tofu_ls",
+  "yamlls",
 }
 
 return {
