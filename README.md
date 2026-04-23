@@ -8,7 +8,32 @@
 - [.inputrc](https://raw.githubusercontent.com/marcofranssen/dotfiles/main/.inputrc)
 - [.vimrc](https://raw.githubusercontent.com/marcofranssen/dotfiles/main/.vimrc)
 
-## Configure ViM
+## Prerequisites
+
+- [Homebrew](https://brew.sh/)
+- [Tmux](https://tmux.github.io/)
+- [GNU stow](https://www.gnu.org/software/stow/)
+- [ZSH](https://www.zsh.org/)
+- [GH Cli](https://cli.github.com/)
+- [delta](https://github.com/dandavison/delta)
+
+Once Homebrew is installed the remainder of the prerequisites can be installed with the following command:
+
+```shell
+brew install git tmux stow zsh gh
+```
+
+## Installation
+
+Checkout the repository into `~/.dotfiles` and use stow to create the symlinks:
+
+```shell
+git clone git@github.com/marcofranssen/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+stow .
+```
+
+### Configure ViM
 
 ```shell
 curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_plugins_vim.sh | bash
@@ -17,8 +42,6 @@ curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_p
 ## Configure git
 
 ### Prerequisites
-
-- [delta](https://github.com/dandavison/delta)
 
 ```shell
 curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_gitconfig.sh | bash

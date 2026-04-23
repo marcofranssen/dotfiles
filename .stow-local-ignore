@@ -1,0 +1,11 @@
+Makefile
+
+\.git
+\.gitignore
+\.DS_Store
+
+^/README.*
+
+\.github
+\.gitconfig
+\.gitconfig-private
