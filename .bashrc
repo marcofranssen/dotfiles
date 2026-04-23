@@ -15,6 +15,8 @@ complete -F _ssh ssh
 complete -F _ssh scp
 complete -F _ssh ssh-copy-id
 
+PATH="$PATH:/opt/homebrew/bin"
+
 function showcolors256() {
     local row col blockrow blockcol red green blue
     local showcolor=_showcolor256_${1:-bg}
