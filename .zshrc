@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export GO_PATH="$HOME/go"
 export PATH="$GO_PATH/bin:$PATH"
-export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 export PATH="/usr/homebrew/opt/ncurses/bin:$PATH"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/bash/bin:$PATH"
