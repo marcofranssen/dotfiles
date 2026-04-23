@@ -1,11 +1,19 @@
 -- Mason registry package names
 local mason_packages = {
+  -- Language servers
+  "gopls",
   "lua-language-server",
+  -- LSP-based linters
+  "golangci-lint-langserver",
+  -- Formatters
+  "goimports",
   "stylua",
 }
 
 -- lspconfig server names to activate
 local lsp_servers = {
+  "golangci_lint_ls",
+  "gopls",
   "lua_ls",
 }
 
