@@ -22,9 +22,9 @@
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   whatadded = log --diff-filter=A
   deleted = log --diff-filter=D --summary
-  lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s [%N] %Cgreen(%ar)%Creset' --date=relative
-  lgd = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s [%N] %Cgreen(%ar)%Creset' --date=default
-  lgm = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s [%N] %Cgreen(%ar)%Creset' --date=relative --author=AUTHOR_EMAIL
+  lg = log --graph --pretty=catppuccin --date=relative
+  lgd = log --graph --pretty=catppuccin --date=default
+  lgm = log --graph --pretty=catppuccin --date=relative --author=AUTHOR_EMAIL
   abbr = "!sh -c 'git rev-list --all | grep ^$1 | while read commit; do git --no-pager log -n1 --pretty=format:\"%H %ci %an %s%n\" $commit; done' -"
   refeature = "!f() { git co develop && git pull && git co $1 && git pull && git rebase develop; } ; f"
   ffmerge = "!f() { git refeature $1 && git co develop && git merge $1; } ; f"
@@ -32,7 +32,7 @@
   please = push --force-with-lease
   undo = restore
   unstage = restore --staged
-  wip = for-each-ref --sort='authordate:iso8601' --format='%(color:green)%(authordate:relative)%09%(color:reset)%(refname:short)' refs/heads
+  wip = for-each-ref --sort=authordate:iso8601 --format=\"%(color:#a6e3a1)%(authordate:relative)%09%(color:reset)%(refname:short)\" refs/heads
 [color]
   ui = always
 [core]
@@ -63,11 +63,19 @@
 [difftool]
   prompt = false
 [commit]
-	gpgSign = true
+  gpgSign = true
 [tag]
-	forceSignAnnotated = true
+  forceSignAnnotated = true
 
 [includeIf "gitdir:~/code/priv/**/*"]
     path = "~/.gitconfig-private"
+[includeIf "gitdir:~/.dotfiles"]
+    path = "~/.gitconfig-private"
 [init]
 	defaultBranch = main
+[credential "https://github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[pretty]
+	catppuccin = "tformat:%C(#f38ba8)%h%Creset %C(#f9e2af)%an%d%Creset %s [%N] %C(#a6e3a1)(%ar)%Creset"
