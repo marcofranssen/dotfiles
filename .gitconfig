@@ -42,11 +42,13 @@
   autocrlf = false
 [interactive]
   diffFilter = delta --color-only
+[include]
+  path = ~/.delta/themes.toml
 [delta]
   navigate = true
   dark = true
-  syntax-theme = "GitHub"
   line-numbers = true
+  features = catppuccin-mocha
 [push]
   default = current
 [branch]
