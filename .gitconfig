@@ -8,8 +8,7 @@
   cb = "!f() { git co `git log --until=\"$*\" -1 --format=%h`; } ; f"
   s = status --short
   d = diff
-  dc = diff --cached --word-diff=color
-  dw = diff --word-diff=color
+  dc = diff --cached
   l = log
   a = add
   addnw = !sh -c 'git diff -U0 -w --no-color --ignore-blank-lines "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
@@ -32,7 +31,7 @@
   please = push --force-with-lease
   undo = restore
   unstage = restore --staged
-  wip = for-each-ref --sort=authordate:iso8601 --format=\"%(color:#a6e3a1)%(authordate:relative)%09%(color:reset)%(refname:short)\" refs/heads
+  wip = "for-each-ref --sort=authordate:iso8601 --color --format='%(color:#a6e3a1)%(authordate:relative)%09%(color:reset)%(refname:short)' refs/heads"
 [color]
   ui = always
 [core]
