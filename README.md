@@ -16,11 +16,13 @@
 - [ZSH](https://www.zsh.org/)
 - [GH Cli](https://cli.github.com/)
 - [delta](https://github.com/dandavison/delta)
+- [Tree-sitter](https://tree-sitter.github.io/tree-sitter/)
 
 Once Homebrew is installed the remainder of the prerequisites can be installed with the following command:
 
 ```shell
 brew install git tmux stow zsh gh
+cargo install tree-sitter-cli --locked
 ```
 
 ## Installation
