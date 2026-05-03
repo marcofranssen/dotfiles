@@ -9,6 +9,7 @@ end
 
 require("config.lazy")
 require("config.options")
+require("config.keymaps")
 require("config.autocmd")
 
 -- Load project after config (needs to happen after other config)
