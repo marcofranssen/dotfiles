@@ -11,6 +11,7 @@
 ## Prerequisites
 
 - [Homebrew](https://brew.sh/)
+- [Ghostty](https://ghostty.org/)
 - [Tmux](https://tmux.github.io/)
 - [GNU stow](https://www.gnu.org/software/stow/)
 - [ZSH](https://www.zsh.org/)
