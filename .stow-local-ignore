@@ -9,3 +9,6 @@ Makefile
 \.github
 \.gitconfig
 \.gitconfig-private
+catppuccin-mocha.itermcolors
+install.*\.sh
+LICENSE
