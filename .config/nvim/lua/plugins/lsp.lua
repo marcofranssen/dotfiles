@@ -3,6 +3,7 @@ local mason_packages = {
   -- Language servers
   "bash-language-server",
   "buf",
+  -- "copilot-language-server",
   "css-lsp",
   "dockerfile-language-server",
   "gopls",
@@ -44,6 +45,7 @@ local lsp_servers = {
   "tailwindcss",
   "tofu_ls",
   "yamlls",
+  -- "copilot",
 }
 
 return {
