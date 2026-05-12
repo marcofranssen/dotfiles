@@ -13,10 +13,15 @@ export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 export PATH="/usr/homebrew/opt/ncurses/bin:$PATH"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/bash/bin:$PATH"
-
-
-# krew path
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+export PNPM_HOME="/Users/marco/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+export TENV_AUTO_INSTALL=true
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -89,7 +94,7 @@ ZSH_CUSTOM="$HOME/.dotfiles/.oh-my-zsh/custom"
 plugins=(macos gh direnv argocd kubectl helm gh docker terraform golang keychain gpg-agent sigstore zsh-autosuggestions aws direnv fzf nerdctl terraform-docs ansi-colors iterm2)
 
 zstyle :omz:plugins:keychain agents ssh,gpg
-zstyle :omz:plugins:keychain identities id_ed25519 id_rsa EA0B37B819AFFBE6 196A5F57979D5CD2 E3F7058A53F6DF52
+zstyle :omz:plugins:keychain identities id_ed25519 EA0B37B819AFFBE6 196A5F57979D5CD2 E3F7058A53F6DF52
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,9 +107,11 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
+  export EDITOR='vim'
+  export KUBE_EDITOR='vim'
 else
-    export EDITOR='mvim'
+  export EDITOR='nvim'
+  export KUBE_EDITOR='nvim'
 fi
 
 # Compilation flags
