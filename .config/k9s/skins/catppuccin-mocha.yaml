@@ -1,0 +1,114 @@
+# -----------------------------------------------------------------------------
+# Catppuccin Mocha Skin (matched to tmux theme)
+# -----------------------------------------------------------------------------
+
+foreground: &foreground "#cdd6f4"
+background: &background "#161621"
+surface: &surface "#313244"
+black: &black "#12121b"
+blue: &blue "#89b4fa"
+lavender: &lavender "#b4befe"
+green: &green "#a6e3a1"
+grey: &grey "#a6adc8"
+orange: &orange "#fab387"
+purple: &purple "#cba4f7"
+red: &red "#f38ba8"
+yellow: &yellow "#f9e2af"
+teal: &teal "#94e2d5"
+
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *teal
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *orange
+  info:
+    fgColor: *grey
+    sectionColor: *teal
+  help:
+    fgColor: *foreground
+    bgColor: *background
+    keyColor: *yellow
+    numKeyColor: *blue
+    sectionColor: *purple
+  dialog:
+    fgColor: *black
+    bgColor: *background
+    buttonFgColor: *foreground
+    buttonBgColor: *teal
+    buttonFocusFgColor: *black
+    buttonFocusBgColor: *blue
+    labelFgColor: *orange
+    fieldFgColor: *blue
+  frame:
+    border:
+      fgColor: *surface
+      focusColor: *teal
+    menu:
+      fgColor: *grey
+      keyColor: *yellow
+      numKeyColor: *yellow
+    crumbs:
+      fgColor: *black
+      bgColor: *teal
+      activeColor: *yellow
+    status:
+      newColor: *blue
+      modifyColor: *yellow
+      addColor: *green
+      pendingColor: *orange
+      errorColor: *red
+      highlightColor: *teal
+      killColor: *purple
+      completedColor: *grey
+    title:
+      fgColor: *teal
+      bgColor: *background
+      highlightColor: *purple
+      counterColor: *foreground
+      filterColor: *lavender
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *teal
+        - *red
+      defaultChartColors:
+        - *teal
+        - *red
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      cursorFgColor: *black
+      cursorBgColor: *teal
+      markColor: *yellow
+      header:
+        fgColor: *grey
+        bgColor: *background
+        sorterColor: *orange
+    xray:
+      fgColor: *teal
+      bgColor: *background
+      cursorColor: *foreground
+      graphicColor: *yellow
+      showIcons: false
+    yaml:
+      keyColor: *purple
+      colonColor: *grey
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *teal
+        bgColor: *background
+        toggleOnColor: *teal
+        toggleOffColor: *grey
+    help:
+      fgColor: *grey
+      bgColor: *background
+      indicator:
+        fgColor: *teal

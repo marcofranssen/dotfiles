@@ -15,6 +15,8 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/bash/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+export K9S_CONFIG_DIR="$HOME/.config/k9s"
+
 export PNPM_HOME="/Users/marco/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
