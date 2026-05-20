@@ -43,13 +43,6 @@ return {
       -- { "<leader>e", function() Snacks.explorer.toggle() end, desc = "Toggle Explorer" },
       -- find
       {
-        "<leader>fb",
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = "Find [B]uffers",
-      },
-      {
         "<leader>ff",
         function()
           Snacks.picker.files()
@@ -84,6 +77,13 @@ return {
         end,
         desc = "Help Pages",
       },
+      {
+        "<leader>?",
+        function()
+          Snacks.picker.keymaps()
+        end,
+        desc = "Search Keymaps",
+      },
     },
     opts = {
       bigfile = { enabled = true },
@@ -116,7 +116,31 @@ return {
       scope = { enabled = true },
       scroll = { enabled = true },
       statuscolumn = { enabled = true },
-      words = { enabled = true },
+      words = { enabled = true, debounce = 200 },
+    },
+  },
+  {
+    "folke/trouble.nvim",
+    optional = true,
+    specs = {
+      "folke/snacks.nvim",
+      opts = function(_, opts)
+        return vim.tbl_deep_extend("force", opts or {}, {
+          picker = {
+            actions = require("trouble.sources.snacks").actions,
+            win = {
+              input = {
+                keys = {
+                  ["<c-t>"] = {
+                    "trouble_open",
+                    mode = { "n", "i" },
+                  },
+                },
+              },
+            },
+          },
+        })
+      end,
     },
   },
 }
