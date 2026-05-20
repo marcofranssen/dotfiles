@@ -14,6 +14,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+-- Disable scrolloff in terminal buffers so the prompt stays at the bottom
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("term-scrolloff", { clear = true }),
+  callback = function()
+    vim.opt_local.scrolloff = 0
+  end,
+})
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
