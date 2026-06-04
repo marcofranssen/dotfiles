@@ -7,6 +7,7 @@ if vim.fn.filereadable(project_config) == 1 then
   dofile(project_config)
 end
 
+require("config.usercmd")
 require("config.lazy")
 require("config.options")
 require("config.keymaps")
