@@ -21,7 +21,7 @@ return {
     event = "VeryLazy",
     opts = {
       retirementAgeMins = 60 * 4, -- 4 hours
-      minimumBufferNum = 10,
+      minimumBufferNum = 20,
       notificationOnAutoClose = true,
     },
   },
