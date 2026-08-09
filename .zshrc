@@ -8,7 +8,9 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export GO_PATH="$HOME/go"
+export CARGO_PATH="$HOME/.cargo"
 export PATH="$GO_PATH/bin:$PATH"
+export PATH="$CARGO_PATH/bin:$PATH"
 export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 export PATH="/usr/homebrew/opt/ncurses/bin:$PATH"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
