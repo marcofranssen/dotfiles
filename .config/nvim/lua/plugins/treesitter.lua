@@ -23,6 +23,7 @@ local ensureInstalled = {
   "pug",
   "query",
   "regex",
+  "rust",
   "scss",
   "sql",
   "ssh_config",
