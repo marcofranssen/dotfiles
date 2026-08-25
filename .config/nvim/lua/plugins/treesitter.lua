@@ -28,7 +28,6 @@ local ensureInstalled = {
   "sql",
   "ssh_config",
   "terraform",
-  "tmux",
   "typescript",
   "vim",
   "vimdoc",
