@@ -78,6 +78,20 @@ return {
         desc = "Help Pages",
       },
       {
+        "<leader>sd",
+        function()
+          Snacks.picker.diagnostics()
+        end,
+        desc = "Search Diagnostics",
+      },
+      {
+        "<leader>sD",
+        function()
+          Snacks.picker.diagnostics_buffer()
+        end,
+        desc = "Search Buffer Diagnostics",
+      },
+      {
         "<leader>?",
         function()
           Snacks.picker.keymaps()

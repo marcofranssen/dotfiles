@@ -5,9 +5,16 @@ end
 
 --- highligh line number according to diagnostics
 vim.diagnostic.config({
+  update_in_insert = false,
   severity_sort = true,
   float = { border = "rounded", source = "if_many" },
-  underline = { severity = vim.diagnostic.severity.ERROR },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  virtual_lines = false,
+  jump = {
+    on_jump = function()
+      vim.diagnostic.open_float()
+    end,
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "󰅚 ",
