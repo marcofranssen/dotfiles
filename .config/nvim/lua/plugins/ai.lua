@@ -6,6 +6,7 @@ return {
   {
     "folke/sidekick.nvim",
     opts = {
+      nes = { enabled = true },
       mux = {
         backend = "zellij",
         enabled = true,
