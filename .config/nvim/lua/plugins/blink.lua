@@ -4,6 +4,7 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       "folke/lazydev.nvim",
+      { "brenoprata10/nvim-highlight-colors", opts = { render = "virtual", enable_tailwind = true } },
     },
     version = "1.*",
     ---
