@@ -128,14 +128,21 @@ The `packages` list in `.pi/agent/settings.json` installs the following
 extensions and skill sources when Pi starts. Package changes also require a Pi
 restart.
 
-| Package                                                                         | Purpose                                                                                                                                    |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`npm:pi-subagents`](https://github.com/nicobailon/pi-subagents#readme)         | Adds the multi-model subagent fleet, including the `scout`, `delegate`, `researcher`, `worker`, `reviewer`, and `oracle` roles used above. |
-| [`npm:pi-web-access`](https://github.com/nicobailon/pi-web-access#readme)       | Provides web research tools such as `web_search`, `fetch_content`, and `get_search_content`, enabling source-backed researcher runs.       |
-| [`git:github.com/apmantza/pi-lens`](https://github.com/apmantza/pi-lens#readme) | Adds code-intelligence tools: symbol/module discovery, targeted reads, LSP diagnostics, and optional AST/LSP navigation tools.             |
-| [`git:github.com/cli/cli`](https://cli.github.com/manual/)                      | Supplies GitHub CLI-related agent skills and usage guidance. The `gh` executable itself is installed separately through Homebrew.          |
+| Package                                      | Purpose                                                                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`npm:pi-subagents`][pi-subagents]           | Adds the multi-model subagent fleet, including the `scout`, `delegate`, `researcher`, `worker`, `reviewer`, and `oracle` roles used above. |
+| [`npm:pi-web-access`][pi-web-access]         | Provides web research tools such as `web_search`, `fetch_content`, and `get_search_content`, enabling source-backed researcher runs.       |
+| [`git:github.com/apmantza/pi-lens`][pi-lens] | Adds code-intelligence tools: symbol/module discovery, targeted reads, LSP diagnostics, and optional AST/LSP navigation tools.             |
+| [`npm:@piotr-oles/pi-reflag`][pi-reflag]     | Provides reflag, a search/command utility used for efficient repository inspection. `brew install ripgrep fd`                              |
+| [`git:github.com/cli/cli`][gh-cli]           | Supplies GitHub CLI-related agent skills and usage guidance. The `gh` executable itself is installed separately through Homebrew.          |
 
 Packages can expose tools, commands, agents, or skills. A skill's guidance is
 loaded only when the task matches it; package installation alone does not force
 a subagent or tool to run. Keep package names in `settings.json` rather than
 installing them ad hoc so the Pi environment is reproducible across machines.
+
+[pi-subagents]: https://github.com/nicobailon/pi-subagents#readme "Pi Subagents"
+[pi-web-access]: https://github.com/nicobailon/pi-web-access#readme "Pi Web Access"
+[pi-lens]: https://github.com/apmantza/pi-lens#readme "Pi Lens"
+[pi-reflag]: https://github.com/piotr-oles/pi-extensions/tree/main/packages/pi-reflag "Pi Reflag"
+[gh-cli]: https://cli.github.com/manual/ "GitHub CLI"

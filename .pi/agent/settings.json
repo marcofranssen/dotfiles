@@ -18,6 +18,7 @@
     "openai-codex/gpt-5.6-luna"
   ],
   "packages": [
+    "npm:@piotr-oles/pi-reflag",
     "npm:pi-subagents",
     "git:github.com/apmantza/pi-lens",
     "npm:pi-web-access",
