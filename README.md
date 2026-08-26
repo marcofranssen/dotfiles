@@ -55,3 +55,21 @@ curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_g
 ```shell
 curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_ghconfig.sh | bash
 ```
+
+## Configure AI
+
+### Pi
+
+Install the Pi coding agent with the following command:
+
+```shell
+pnpm add -g --ignore-scripts @earendil-works/pi-coding-agent
+```
+
+Login the providers using the following command:
+
+```shell
+pi login
+```
+
+Login with your OpenAI account, Bedrock account or any other provider you want to use. You can also login with multiple providers. The configuration in this repository is using OpenAI and Bedrock.

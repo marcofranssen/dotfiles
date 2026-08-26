@@ -1,0 +1,20 @@
+{
+  "lastChangelogVersion": "0.84.3",
+  "theme": "dark",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
+  "defaultThinkingLevel": "medium",
+  "enabledModels": [
+    "amazon-bedrock/anthropic.claude-fable-5",
+    "amazon-bedrock/anthropic.claude-opus-4-8",
+    "amazon-bedrock/anthropic.claude-sonnet-5",
+    "amazon-bedrock/anthropic.claude-sonnet-4-6",
+    "amazon-bedrock/anthropic.claude-haiku-4-5-20251001-v1:0",
+    "amazon-bedrock/global.openai.gpt-5.6-luna",
+    "amazon-bedrock/global.openai.gpt-5.6-sol",
+    "amazon-bedrock/global.openai.gpt-5.6-terra",
+    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-5.6-terra",
+    "openai-codex/gpt-5.6-luna"
+  ]
+}
