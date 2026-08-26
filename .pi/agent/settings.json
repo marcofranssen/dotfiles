@@ -16,5 +16,68 @@
     "openai-codex/gpt-5.6-sol",
     "openai-codex/gpt-5.6-terra",
     "openai-codex/gpt-5.6-luna"
-  ]
+  ],
+  "packages": [
+    "npm:pi-subagents",
+    "npm:pi-web-access",
+  ],
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-5.6-luna",
+    "defaultThinking": "low",
+    "agentOverrides": {
+      "scout": {
+        "description": "Fast repository reconnaissance and concise context summaries.",
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "low",
+        "fallbackModels": [
+          "amazon-bedrock/global.openai.gpt-5.6-luna",
+          "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0"
+        ]
+      },
+      "researcher": {
+        "description": "Evidence-led external research and source-backed synthesis.",
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "medium",
+        "fallbackModels": [
+          "amazon-bedrock/global.openai.gpt-5.6-terra",
+          "amazon-bedrock/global.anthropic.claude-sonnet-4-6",
+          "amazon-bedrock/global.anthropic.claude-sonnet-5"
+        ]
+      },
+      "delegate": {
+        "description": "Lightweight, well-scoped delegation, including summaries and routine tasks.",
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "low",
+        "fallbackModels": [
+          "amazon-bedrock/global.openai.gpt-5.6-luna",
+          "amazon-bedrock/global.anthropic.claude-sonnet-4-6"
+        ]
+      },
+      "worker": {
+        "description": "Primary implementation agent for approved, well-scoped changes.",
+        "model": "amazon-bedrock/global.anthropic.claude-sonnet-5",
+        "thinking": "high",
+        "fallbackModels": ["amazon-bedrock/global.anthropic.claude-sonnet-4-6"]
+      },
+      "reviewer": {
+        "description": "Deep, adversarial review for correctness, regressions, and security risks.",
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high",
+        "fallbackModels": [
+          "amazon-bedrock/global.openai.gpt-5.6-sol",
+          "amazon-bedrock/global.anthropic.claude-opus-4-8",
+          "amazon-bedrock/global.anthropic.claude-sonnet-5"
+        ]
+      },
+      "oracle": {
+        "description": "High-stakes reasoning and decision-consistency advisory review.",
+        "model": "amazon-bedrock/global.anthropic.claude-opus-4-8",
+        "thinking": "high",
+        "fallbackModels": [
+          "amazon-bedrock/global.anthropic.claude-sonnet-5",
+          "amazon-bedrock/global.anthropic.claude-fable-5"
+        ]
+      }
+    }
+  }
 }
