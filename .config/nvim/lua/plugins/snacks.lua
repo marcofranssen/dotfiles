@@ -107,6 +107,11 @@ return {
       input = { enabled = true },
       picker = {
         enabled = true,
+        sources = {
+          -- Snacks' smart picker uses the `files` source, which hides dotfiles by default.
+          -- Keep dotfiles discoverable (notably `.github/**`) in all file pickers.
+          files = { hidden = true },
+        },
         actions = {
           sidekick_send = function(...)
             return require("sidekick.cli.picker.snacks").send(...)
