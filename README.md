@@ -58,6 +58,18 @@ curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_g
 
 ## Configure AI
 
+### nono.sh
+
+I'm using [nono.sh][] to sandbox my agents.
+
+```shell
+brew install nono
+
+nono pull nolabs-ai/pi
+
+nono profile init pi --extends nolabs-ai/pi --full
+```
+
 ### Pi
 
 Install the Pi coding agent:
@@ -146,3 +158,4 @@ installing them ad hoc so the Pi environment is reproducible across machines.
 [pi-lens]: https://github.com/apmantza/pi-lens#readme "Pi Lens"
 [pi-reflag]: https://github.com/piotr-oles/pi-extensions/tree/main/packages/pi-reflag "Pi Reflag"
 [gh-cli]: https://cli.github.com/manual/ "GitHub CLI"
+[nono.sh]: https://nono.sh/ "Nono"

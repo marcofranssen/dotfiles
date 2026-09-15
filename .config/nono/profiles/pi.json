@@ -1,0 +1,113 @@
+{
+  "extends": ["nolabs-ai/pi"],
+  "meta": {
+    "name": "pi",
+    "version": "",
+    "description": null,
+    "author": null
+  },
+  "security": {
+    "signal_mode": null,
+    "process_info_mode": null,
+    "ipc_mode": null,
+    "capability_elevation": null,
+    "approval_backends": {},
+    "approval_defaults": null,
+    "wsl2_proxy_policy": null
+  },
+  "groups": {
+    "include": [],
+    "exclude": []
+  },
+  "commands": {
+    "allow": [],
+    "deny": []
+  },
+  "filesystem": {
+    "allow": ["~/.pi-lens", "~/.dotfiles/.pi/agent"],
+    "read": [
+      "~/.agents",
+      "~/.pi-lens/bin",
+      "~/.pi-lens/logs",
+      "~/.pi-lens/projects/Users-marco-dotfiles",
+      "~/.pi-lens/projects/Users-marco-dotfiles/cache",
+      "~/.pi-lens/projects/Users-marco-dotfiles/sessions",
+      "~/.pi-lens/tools"
+    ],
+    "write": [],
+    "allow_file": [
+      "~/.pi-lens/extension.log",
+      "~/.pi-lens/latency.log",
+      "~/.pi-lens/sessionstart.log",
+      "~/.pi-lens/word-index.log",
+      "~/.dotfiles/.pi/agent/settings.json"
+    ],
+    "read_file": [
+      "~/.pi-lens/bus-events.log",
+      "~/.pi-lens/cascade.log",
+      "~/.pi-lens/dispositions.log",
+      "~/.pi-lens/instances.json",
+      "~/.pi-lens/orphan-backstop.json",
+      "~/.pi-lens/probe-cache.json",
+      "~/.pi-lens/projects/Users-marco-dotfiles/cache/project-snapshot.json.gz",
+      "~/.pi-lens/projects/Users-marco-dotfiles/cache/project-snapshot.meta.json",
+      "~/.pi-lens/projects/Users-marco-dotfiles/change-log.jsonl",
+      "~/.pi-lens/read-guard.log",
+      "~/.pi-lens/review-graph.log",
+      "~/.pi-lens/tools/node_modules/.bin/bash-language-server",
+      "~/.pi-lens/tree-sitter.log"
+    ],
+    "write_file": [],
+    "unix_socket": [],
+    "unix_socket_bind": [],
+    "unix_socket_dir": [],
+    "unix_socket_dir_bind": [],
+    "unix_socket_subtree": [],
+    "unix_socket_subtree_bind": [],
+    "deny": [],
+    "bypass_protection": [],
+    "suppress_save_prompt": []
+  },
+  "network": {
+    "block": false,
+    "allow_http2": false,
+    "allow_domain": [],
+    "deny_domain": [],
+    "credentials": [],
+    "open_port": [],
+    "open_port_range": [],
+    "listen_port": [],
+    "listen_port_range": [],
+    "connect_port": [],
+    "no_proxy": [],
+    "custom_credentials": {},
+    "tls_intercept": null,
+    "upstream_proxy": null,
+    "upstream_bypass": []
+  },
+  "diagnostics": {
+    "suppress_system_services": []
+  },
+  "linux": {
+    "af_unix_mediation": null,
+    "sandbox_policy": null
+  },
+  "env_credentials": {},
+  "credential_capture": {},
+  "credential_providers": {},
+  "credential_routes": [],
+  "workdir": {
+    "access": "readwrite"
+  },
+  "hooks": {},
+  "session_hooks": {},
+  "rollback": {
+    "exclude_patterns": [],
+    "exclude_globs": []
+  },
+  "interactive": false,
+  "skipdirs": [],
+  "packs": [],
+  "command_args": [],
+  "unsafe_macos_seatbelt_rules": []
+}

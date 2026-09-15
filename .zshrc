@@ -27,6 +27,8 @@ esac
 
 export TENV_AUTO_INSTALL=true
 
+alias pi='nono run --profile pi --allow-cwd -- pi'
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
