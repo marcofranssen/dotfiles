@@ -19,10 +19,10 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export K9S_CONFIG_DIR="$HOME/.config/k9s"
 
-export PNPM_HOME="/Users/marco/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 
 export TENV_AUTO_INSTALL=true
