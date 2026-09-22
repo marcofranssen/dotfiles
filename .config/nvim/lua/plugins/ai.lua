@@ -12,6 +12,11 @@ return {
           backend = "zellij",
           enabled = false,
         },
+        tools = {
+          omp = {
+            cmd = { "omp" },
+          },
+        },
       },
     },
     keys = {
