@@ -7,9 +7,11 @@ return {
     "folke/sidekick.nvim",
     opts = {
       nes = { enabled = true },
-      mux = {
-        backend = "zellij",
-        enabled = true,
+      cli = {
+        mux = {
+          backend = "zellij",
+          enabled = false,
+        },
       },
     },
     keys = {
