@@ -1,22 +1,23 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "theme": "dark",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-6-sol",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
     "amazon-bedrock/anthropic.claude-fable-5",
-    "amazon-bedrock/global.anthropic.claude-opus-5",
+    "amazon-bedrock/global.anthropic.claude-opus-5-5",
     "amazon-bedrock/anthropic.claude-sonnet-5",
+    "amazon-bedrock/global.anthropic.claude-sonnet-5",
     "amazon-bedrock/anthropic.claude-sonnet-4-6",
     "amazon-bedrock/anthropic.claude-haiku-4-5-20251001-v1:0",
     "amazon-bedrock/global.openai.gpt-5.6-luna",
     "amazon-bedrock/global.openai.gpt-5.6-sol",
     "amazon-bedrock/global.openai.gpt-5.6-terra",
-    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-6-astra",
+    "openai-codex/gpt-6-sol",
     "openai-codex/gpt-5.6-terra",
-    "openai-codex/gpt-5.6-luna",
-    "openai-codex/gpt-6-astra"
+    "openai-codex/gpt-6-luna"
   ],
   "packages": [
     "npm:@piotr-oles/pi-reflag",
@@ -27,56 +28,38 @@
     "npm:pi-cost"
   ],
   "subagents": {
-    "defaultModel": "openai-codex/gpt-5.6-luna",
+    "defaultModel": "openai-codex/gpt-6-luna",
     "defaultThinking": "low",
     "agentOverrides": {
       "scout": {
         "description": "Fast repository reconnaissance and concise context summaries.",
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "low",
-        "fallbackModels": [
-          "amazon-bedrock/global.openai.gpt-5.6-luna",
-          "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0"
-        ]
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "low"
       },
       "researcher": {
         "description": "Evidence-led external research and source-backed synthesis.",
-        "model": "openai-codex/gpt-5.6-terra",
-        "thinking": "medium",
-        "fallbackModels": [
-          "amazon-bedrock/global.openai.gpt-5.6-terra",
-          "amazon-bedrock/global.anthropic.claude-sonnet-5"
-        ]
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "medium"
       },
       "delegate": {
         "description": "Lightweight, well-scoped delegation, including summaries and routine tasks.",
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "low",
-        "fallbackModels": [
-          "amazon-bedrock/global.openai.gpt-5.6-luna",
-          "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0"
-        ]
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "low"
       },
       "worker": {
         "description": "Primary implementation agent for approved, well-scoped changes.",
         "model": "amazon-bedrock/global.anthropic.claude-sonnet-5",
-        "thinking": "medium",
-        "fallbackModels": ["openai-codex/gpt-5.6-terra", "amazon-bedrock/global.anthropic.claude-sonnet-4-6"]
+        "thinking": "medium"
       },
       "reviewer": {
         "description": "Deep, adversarial review for correctness, regressions, and security risks.",
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "high",
-        "fallbackModels": [
-          "amazon-bedrock/global.anthropic.claude-opus-5",
-          "amazon-bedrock/global.anthropic.claude-sonnet-5"
-        ]
+        "model": "amazon-bedrock/global.anthropic.claude-opus-5-5",
+        "thinking": "high"
       },
       "oracle": {
         "description": "High-stakes reasoning and decision-consistency advisory review.",
         "model": "openai-codex/gpt-6-astra",
-        "thinking": "high",
-        "fallbackModels": ["amazon-bedrock/global.anthropic.claude-opus-5"]
+        "thinking": "high"
       }
     }
   }
