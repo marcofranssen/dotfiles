@@ -3,5 +3,7 @@ alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias sed='gsed'
 alias t=tofu
+alias ll="eza -l"
+alias ls="eza"
 # alias docker=nerdctl
 # alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/libexec/gnubin:$PATH gws"

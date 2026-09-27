@@ -19,10 +19,18 @@
 - [delta](https://github.com/dandavison/delta)
 - [Tree-sitter](https://tree-sitter.github.io/tree-sitter/)
 
+### CLI tools
+
+- [ripgrep](https://github.com/burntsushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [bat](https://github.com/sharkdp/bat)
+- [eza](https://eza.rocks/)
+- [fzf](https://junegunn.github.io/fzf/)
+
 Once Homebrew is installed the remainder of the prerequisites can be installed with the following command:
 
 ```shell
-brew install git tmux stow zsh gh
+brew install git tmux stow zsh gh eza zellij ripgrep fd gnu-sed coreutils
 cargo install tree-sitter-cli --locked
 ```
 

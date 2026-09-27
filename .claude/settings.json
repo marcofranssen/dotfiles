@@ -1,0 +1,73 @@
+{
+  "awsAuthRefresh": "aws sso login --profile eks-testing-admin",
+  "env": {
+    "AWS_PROFILE": "bedrock",
+    "AWS_REGION": "us-east-1",
+    "CLAUDE_CODE_USE_MANTLE": "true",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "16384",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "anthropic.claude-fable-5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic.claude-opus-4-8",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "anthropic.claude-sonnet-5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "anthropic.claude-haiku-4-5"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "Bash(make:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(kubectl get:*)",
+      "Bash(kubectl describe:*)",
+      "Bash(kubectl top:*)",
+      "Bash(helm:*)",
+      "Bash(tar:*)",
+      "Bash(gh:*)"
+    ],
+    "deny": [
+      "Bash(gh auth token)"
+    ],
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(kubectl delete:*)",
+      "Bash(helm delete:*)"
+    ]
+  },
+  "model": "sonnet",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "hap-ai@hsp-aws-platform-ai": true
+  },
+  "extraKnownMarketplaces": {
+    "hsp-aws-platform-ai": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/marco/code/philips-internal/hap/ai"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "tui": "fullscreen",
+  "theme": "light-ansi",
+  "thinking": {
+    "type": "adaptive",
+    "display": "summarized"
+  }
+}
