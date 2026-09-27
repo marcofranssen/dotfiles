@@ -25,7 +25,11 @@
     "git:github.com/apmantza/pi-lens",
     "npm:pi-web-access",
     "git:github.com/cli/cli",
-    "npm:pi-cost"
+    "npm:pi-cost",
+    "npm:context-mode",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@plannotator/pi-extension"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-6-luna",
