@@ -1,21 +1,19 @@
 {
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "1.0.0",
   "theme": "dark",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-sol",
+  "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
-    "amazon-bedrock/anthropic.claude-fable-5",
+    "amazon-bedrock/global.anthropic.claude-fable-5-1",
     "amazon-bedrock/global.anthropic.claude-opus-5-5",
-    "amazon-bedrock/anthropic.claude-sonnet-5",
-    "amazon-bedrock/global.anthropic.claude-sonnet-5",
-    "amazon-bedrock/anthropic.claude-sonnet-4-6",
-    "amazon-bedrock/anthropic.claude-haiku-4-5-20251001-v1:0",
-    "amazon-bedrock/global.openai.gpt-5.6-luna",
-    "amazon-bedrock/global.openai.gpt-5.6-sol",
+    "amazon-bedrock/global.anthropic.claude-sonnet-5-5",
+    "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "amazon-bedrock/global.openai.gpt-6-luna",
+    "amazon-bedrock/global.openai.gpt-6.1-sol",
     "amazon-bedrock/global.openai.gpt-5.6-terra",
     "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-6-sol",
+    "openai-codex/gpt-6.1-sol",
     "openai-codex/gpt-5.6-terra",
     "openai-codex/gpt-6-luna"
   ],
@@ -42,7 +40,7 @@
       },
       "researcher": {
         "description": "Evidence-led external research and source-backed synthesis.",
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "medium"
       },
       "delegate": {
@@ -52,7 +50,7 @@
       },
       "worker": {
         "description": "Primary implementation agent for approved, well-scoped changes.",
-        "model": "amazon-bedrock/global.anthropic.claude-sonnet-5",
+        "model": "amazon-bedrock/global.anthropic.claude-sonnet-5-5",
         "thinking": "medium"
       },
       "reviewer": {
