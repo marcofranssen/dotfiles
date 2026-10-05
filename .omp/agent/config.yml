@@ -1,0 +1,85 @@
+modelRoles:
+  default: openai-codex/gpt-6.1-sol:medium
+  smol: openai-codex/gpt-6-luna
+  slow: amazon-bedrock/global.anthropic.claude-opus-5-5:medium
+  plan: "@slow"
+  commit: "@smol"
+  tiny: "@smol"
+  task: amazon-bedrock/global.anthropic.claude-haiku-5-5
+  advisor: openai-codex/gpt-6-astra:medium
+enabledModels:
+  - amazon-bedrock/global.anthropic.claude-fable-5-1
+  - amazon-bedrock/global.anthropic.claude-opus-5-5
+  - amazon-bedrock/global.anthropic.claude-sonnet-5-5
+  - amazon-bedrock/global.anthropic.claude-haiku-5-5
+  - amazon-bedrock/global.openai.gpt-6-luna
+  - amazon-bedrock/global.openai.gpt-6.1-sol
+  - amazon-bedrock/global.openai.gpt-6-astra
+  - amazon-bedrock/minimax.minimax-m2.5
+  - amazon-bedrock/nvidia.nemotron-super-3-120b
+  - openai-codex/gpt-6-astra
+  - openai-codex/gpt-6-luna
+  - openai-codex/gpt-6.1-sol
+  - github-copilot/gpt-6-luna
+  - github-copilot/gpt-6.1-sol
+  - github-copilot/gemini-3.8-flash
+  - github-copilot/claude-haiku-5.5
+  - github-copilot/claude-sonnet-5.5
+  - github-copilot/claude-opus-5.5
+symbolPreset: unicode
+composer:
+  shape: band
+  tokenRate: false
+theme:
+  dark: onyx
+  light: light
+setupVersion: 2
+dev:
+  autoqaConsent: granted
+task:
+  agentModelOverrides:
+    scout: "@smol"
+    sonic: "@amazon-bedrock/global.anthropic.claude-haiku-5-5"
+    reviewer: "@slow"
+    security-reviewer: "@slow"
+  disabledAgents: []
+retry:
+  modelFallback: true
+  fallbackChains:
+    default:
+      - amazon-bedrock/global.openai.gpt-6.1-sol:medium
+      - copilot/gpt-6.1-sol:medium
+      - amazon-bedrock/global.anthropic.claude-sonnet-5-5:medium
+    smol:
+      - amazon-bedrock/global.openai.gpt-6-luna
+      - amazon-bedrock/global.anthropic.claude-haiku-5-5
+      - copilot/gpt-6-luna
+    slow:
+      - github-copilot/claude-opus-5.5:medium
+      - amazon-bedrock/global.anthropic.claude-opus-5-5:medium
+    advisor:
+      - amazon-bedrock/global.openai.gpt-6-astra:medium
+      - amazon-bedrock/global.anthropic.claude-fable-5-1:high
+    task:
+      - copilot/claude-haiku-5.5
+      - openai-codex/gpt-6-luna
+      - copilot/gpt-6-luna
+  fallbackRevertPolicy: cooldown-expiry
+  usageAwareFallback: true
+  usageReservePct: 10
+github:
+  enabled: true
+memory:
+  backend: mnemopi
+mnemopi:
+  scoping: per-project-tagged
+  llmMode: smol
+autolearn:
+  enabled: true
+cycleOrder:
+  - smol
+  - default
+  - slow
+  - advisor
+  - task
+
