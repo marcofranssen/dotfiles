@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.0",
+  "lastChangelogVersion": "1.0.4",
   "theme": "dark",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
@@ -8,14 +8,21 @@
     "amazon-bedrock/global.anthropic.claude-fable-5-1",
     "amazon-bedrock/global.anthropic.claude-opus-5-5",
     "amazon-bedrock/global.anthropic.claude-sonnet-5-5",
-    "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "amazon-bedrock/global.anthropic.claude-haiku-5-5",
     "amazon-bedrock/global.openai.gpt-6-luna",
     "amazon-bedrock/global.openai.gpt-6.1-sol",
     "amazon-bedrock/global.openai.gpt-5.6-terra",
     "openai-codex/gpt-6-astra",
     "openai-codex/gpt-6.1-sol",
     "openai-codex/gpt-5.6-terra",
-    "openai-codex/gpt-6-luna"
+    "openai-codex/gpt-6-luna",
+    "github-copilot/gpt-6-luna",
+    "github-copilot/gpt-6-sol",
+    "github-copilot/gpt-5.6-terra",
+    "github-copilot/gemini-3.8-flash",
+    "github-copilot/claude-haiku-5.5",
+    "github-copilot/claude-sonnet-5.5",
+    "github-copilot/claude-opus-5.5"
   ],
   "packages": [
     "npm:@piotr-oles/pi-reflag",
@@ -24,6 +31,9 @@
     "npm:pi-web-access",
     "git:github.com/cli/cli",
     "npm:pi-cost",
+    {
+      "source": "/Users/marco/.config/nono/packages/nolabs-ai/pi"
+    },
     "npm:context-mode",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
