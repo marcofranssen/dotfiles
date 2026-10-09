@@ -12,7 +12,7 @@ keybind = ctrl+shift+l=resize_split:right,10
 
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
-macos-option-as-alt = true
+macos-option-as-alt = left
 
 unfocused-split-opacity = 0.85
 
