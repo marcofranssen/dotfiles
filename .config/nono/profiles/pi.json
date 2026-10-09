@@ -1,5 +1,5 @@
 {
-  "extends": ["nolabs-ai/pi"],
+  "extends": ["nolabs-ai/pi", "github", "aws", "chromium"],
   "meta": {
     "name": "pi",
     "version": "",
@@ -40,7 +40,8 @@
       "~/.pi-lens/latency.log",
       "~/.pi-lens/sessionstart.log",
       "~/.pi-lens/word-index.log",
-      "~/.dotfiles/.pi/agent/settings.json"
+      "~/.dotfiles/.pi/agent/settings.json",
+      "~/.delta/themes.toml"
     ],
     "read_file": [
       "~/.pi-lens/bus-events.log",
@@ -73,14 +74,12 @@
     "allow_http2": false,
     "allow_domain": [],
     "deny_domain": [],
-    "credentials": [],
     "open_port": [],
     "open_port_range": [],
     "listen_port": [],
     "listen_port_range": [],
     "connect_port": [],
     "no_proxy": [],
-    "custom_credentials": {},
     "tls_intercept": null,
     "upstream_proxy": null,
     "upstream_bypass": []
@@ -93,7 +92,6 @@
     "sandbox_policy": null
   },
   "env_credentials": {},
-  "credential_capture": {},
   "credential_providers": {},
   "credential_routes": [],
   "workdir": {
@@ -105,7 +103,6 @@
     "exclude_patterns": [],
     "exclude_globs": []
   },
-  "interactive": false,
   "skipdirs": [],
   "packs": [],
   "command_args": [],
