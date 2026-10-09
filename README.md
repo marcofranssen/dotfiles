@@ -30,7 +30,7 @@
 Once Homebrew is installed the remainder of the prerequisites can be installed with the following command:
 
 ```shell
-brew install git tmux stow zsh gh eza zellij ripgrep fd gnu-sed coreutils
+brew install git tmux stow zsh gh eza delta zellij ripgrep fd gnu-sed coreutils
 cargo install tree-sitter-cli --locked
 ```
 
@@ -70,12 +70,72 @@ curl -sS https://raw.githubusercontent.com/marcofranssen/dotfiles/main/install_g
 
 I'm using [nono.sh][] to sandbox my agents.
 
+Fresh setup, outside any nono sandbox:
+
 ```shell
 brew install nono
 
+# Installs regular files under ~/.config/nono/packages (not in this repo or Stow).
 nono pull nolabs-ai/pi
+nono pull nolabs-ai/omp
+nono pull nolabs-ai/hermes
 
-nono profile init pi --extends nolabs-ai/pi --full
+# Link the custom profiles from this repo.
+cd ~/.dotfiles && stow .
+
+nono list --installed
+```
+
+Custom profiles in `.config/nono/profiles` remain versioned and Stow-managed.
+
+The agent extension and skill symlinks that `nono pull` creates under `~/.omp`
+and `~/.pi` are intentional; they point into the installed package store. After
+installing or updating packs, restart the agent's nono session.
+
+The Oh My Zsh function in `.oh-my-zsh/custom/nono.zsh` preserves Stow-managed
+profile symlinks when running `nono profile promote <name>`. Load it into an
+existing shell with:
+
+```zsh
+source ~/.dotfiles/.oh-my-zsh/custom/nono.zsh
+nono profile promote omp --diff
+nono profile promote omp
+```
+
+For symlinked profiles, it validates the draft, shows a diff, asks for confirmation
+(unless `--yes`), and copies the draft to the resolved repository file. The draft
+is retained. This is a manual apply workflow, not native promotion: it does not
+provide nono's base-hash conflict checks or atomic replacement. Run it outside
+the sandbox and avoid concurrent profile edits. Regular profiles and other nono
+commands pass through to the executable unchanged.
+
+The composed OMP profile extends `nolabs-ai/omp`, `github`, and `aws`. The
+`github` overlay owns GitHub credential capture and `gh` configuration grants.
+The `aws` overlay owns host-side SigV4 signing and the sandbox's placeholder
+credentials; it currently uses the `bedrock` AWS profile in `us-east-1` for STS,
+Bedrock, and Bedrock Runtime.
+
+When applying drafts from `~/.config/nono/profile-drafts`, promote the
+dependencies before the composed profile, outside the sandbox:
+
+```zsh
+nono profile promote aws
+nono profile promote github
+nono profile validate --draft omp
+nono profile promote omp
+nono run --profile omp -- omp
+```
+
+Keep `~/.aws` protected. OMP uses placeholder keys for provider availability
+and client-side signing; the nono supervisor resolves the real AWS profile and
+re-signs requests. Existing sandbox permissions do not change until restart.
+
+Pi reuses the same `github` and `aws` overlays alongside `nolabs-ai/pi`, while
+keeping its Pi Lens and SSH known-hosts grants in the Pi profile. After the
+shared profiles are promoted, apply the Pi draft outside the sandbox:
+
+```zsh
+nono run --profile pi -- pi
 ```
 
 ### Pi

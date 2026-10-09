@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "name": "chromium",
+    "description": "Chromium/Playwright/Puppeteer launch support on macOS (Mach rendezvous + Chrome for Testing profile dir)"
+  },
+  "filesystem": {
+    "allow": ["~/Library/Application Support/Google/Chrome for Testing"]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow mach-register (global-name-prefix \"org.chromium.crashpad.child_port_handshake.\"))",
+    "(allow mach-register (global-name-prefix \"org.chromium.Chromium.MachPortRendezvousServer.\"))",
+    "(allow mach-register (global-name-prefix \"com.google.chrome.for.testing.MachPortRendezvousServer.\"))"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "name": "aws"
+  },
+  "network": {
+    "credentials": ["aws_sts", "aws_bedrock", "aws_bedrock_runtime"],
+    "custom_credentials": {
+      "aws_sts": {
+        "upstream": "https://sts.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "bedrock",
+          "region": "us-east-1",
+          "service": "sts"
+        }
+      },
+      "aws_bedrock": {
+        "upstream": "https://bedrock.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "bedrock",
+          "region": "us-east-1",
+          "service": "bedrock"
+        }
+      },
+      "aws_bedrock_runtime": {
+        "upstream": "https://bedrock-runtime.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "bedrock",
+          "region": "us-east-1",
+          "service": "bedrock"
+        }
+      }
+    }
+  },
+  "environment": {
+    "deny_vars": [
+      "AWS_PROFILE",
+      "AWS_DEFAULT_PROFILE",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+      "AWS_SESSION_TOKEN",
+      "AWS_SECURITY_TOKEN"
+    ],
+    "set_vars": {
+      "AWS_CONFIG_FILE": "/dev/null",
+      "AWS_SHARED_CREDENTIALS_FILE": "/dev/null",
+      "AWS_ACCESS_KEY_ID": "nono-placeholder",
+      "AWS_SECRET_ACCESS_KEY": "nono-placeholder",
+      "AWS_REGION": "us-east-1",
+      "AWS_DEFAULT_REGION": "us-east-1",
+      "AWS_EC2_METADATA_DISABLED": "true"
+    }
+  }
+}

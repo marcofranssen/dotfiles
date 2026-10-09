@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "name": "github"
+  },
+  "filesystem": {
+    "allow_file": ["~/.config/gh/hosts.yml"],
+    "read_file": ["~/.config/gh/config.yml"]
+  },
+  "network": {
+    "credentials": ["github"],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "cmd://github",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "token {}"
+      }
+    }
+  },
+  "credential_capture": {
+    "github": {
+      "command": ["gh", "auth", "token"],
+      "timeout_secs": 5,
+      "cache_ttl_secs": 900,
+      "cache_path_regex": "^(?:repos/|orgs/)?([^/]+)"
+    }
+  }
+}
