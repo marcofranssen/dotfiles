@@ -32,17 +32,28 @@
     "allow": [],
     "read": ["~/Applications", "~/.omp/agent", "~/.dotfiles/.omp/agent"],
     "write": [],
-    "allow_file": ["~/.omp/agent/config.yml", "~/.dotfiles/.omp/agent/config.yml"],
-    "read_file": ["~/.delta/themes.toml", "~/.dotfiles/.bashrc", "~/.dotfiles/.zshrc"],
+    "allow_file": [
+      "~/.omp/agent/config.yml",
+      "~/.dotfiles/.omp/agent/config.yml"
+    ],
+    "read_file": [
+      "~/.delta/themes.toml",
+      "~/.gitconfig-private",
+      "~/.oh-my-zsh/oh-my-zsh.sh"
+    ],
     "write_file": [],
-    "unix_socket": ["~/.omp/run/daemons/global/text-predict/broker.sock"],
+    "unix_socket": [
+      "~/.omp/run/daemons/global/text-predict/broker.sock"
+    ],
     "unix_socket_bind": [],
-    "unix_socket_dir": [],
+    "unix_socket_dir": [
+      "~/.omp/run/mnemopi"
+    ],
     "unix_socket_dir_bind": [],
     "unix_socket_subtree": [],
     "unix_socket_subtree_bind": [],
     "deny": [],
-    "bypass_protection": ["~/.dotfiles/.bashrc", "~/.dotfiles/.zshrc"],
+    "bypass_protection": [],
     "suppress_save_prompt": []
   },
   "network": {
@@ -50,8 +61,22 @@
     "allow_http2": false,
     "allow_domain": [],
     "deny_domain": [],
-    "open_port": [11434, 8080, 1234],
-    "open_port_range": [],
+    "open_port": [
+      11434,
+      8080,
+      1234,
+      9931
+    ],
+    "open_port_range": [
+      [
+        3000,
+        3010
+      ],
+      [
+        49163,
+        65535
+      ]
+    ],
     "listen_port": [],
     "listen_port_range": [],
     "connect_port": [],
