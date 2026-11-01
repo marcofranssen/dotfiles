@@ -29,6 +29,7 @@ local ensureInstalled = {
   "ssh_config",
   "terraform",
   "typescript",
+  "tsx",
   "vim",
   "vimdoc",
   "yaml",
@@ -37,6 +38,11 @@ local ensureInstalled = {
 return {
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
+  },
+  {
+    "davidmh/mdx.nvim",
+    event = { "BufReadPre *.mdx", "BufNewFile *.mdx" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "nvim-treesitter/nvim-treesitter",
