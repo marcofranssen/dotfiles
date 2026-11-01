@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "name": "colima",
+    "description": "Chromium/Playwright/Puppeteer launch support on macOS (Mach rendezvous + Chrome for Testing profile dir)"
+  },
+  "filesystem": {
+    "unix_socket": ["~/.colima/default/docker.sock"]
+  }
+}

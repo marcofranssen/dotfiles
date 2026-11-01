@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "name": "go",
+    "description": "Go development environment on macOS (Go toolchain, Go modules, and GOPATH support)"
+  },
+  "filesystem": {
+    "allow": ["~/go"]
+  }
+}

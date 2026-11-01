@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "name": "tofu",
+    "description": "Tofu development environment on macOS (Tofu toolchain, Tofu modules, and TOFU_PATH support)"
+  },
+  "filesystem": {
+    "read": ["~/.terraform.d", "~/.terraform.d/plugin-cache", "~/.tenv"]
+  }
+}

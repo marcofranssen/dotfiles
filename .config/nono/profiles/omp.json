@@ -1,10 +1,5 @@
 {
-  "extends": [
-    "nolabs-ai/omp",
-    "github",
-    "aws",
-    "chromium"
-  ],
+  "extends": ["nolabs-ai/omp", "github", "aws", "chromium", "go", "colima", "tofu"],
   "meta": {
     "name": "omp",
     "version": "",
@@ -46,9 +41,7 @@
       "~/.omp/run/daemons/global/text-predict/broker.sock"
     ],
     "unix_socket_bind": [],
-    "unix_socket_dir": [
-      "~/.omp/run/mnemopi"
-    ],
+    "unix_socket_dir": ["~/.omp/run/mnemopi"],
     "unix_socket_dir_bind": [],
     "unix_socket_subtree": [],
     "unix_socket_subtree_bind": [],
