@@ -1,0 +1,277 @@
+#!/usr/bin/env bash
+# gpg-rotate-subkeys: rotate the signing, encryption and authentication
+# subkeys of an OpenPGP key and write a fresh backup set to a directory you
+# choose. Companion script to my GPG series:
+# https://marcofranssen.nl/automate-gpg-subkey-rotation-part-4
+#
+# Works with bash 3.2 (macOS) and later. Tested with GnuPG 2.5.24.
+set -euo pipefail
+umask 077
+
+usage() {
+  cat <<'EOF'
+Usage: gpg-rotate-subkeys [options] FINGERPRINT BACKUP_DIR
+
+Rotate the signing, encryption and authentication subkeys of FINGERPRINT,
+shorten the old subkeys that are still valid, and write a backup set to a new
+timestamped directory inside BACKUP_DIR.
+
+Options:
+  --import FILE            Import this full secret-key backup first. Required
+                           when the primary secret key is offline (sec#). The
+                           primary secret key is removed again at the end.
+  --expire PERIOD          Expiry for the new subkeys (default: 1y)
+  --overlap PERIOD         Remaining validity for old subkeys (default: 1d)
+  --primary-expire PERIOD  Expiry to set on the primary key when it would
+                           expire before the new subkeys (default: 2y)
+  -y, --yes                Don't ask for confirmation
+  -h, --help               Show this help
+
+GitHub, SSH servers, keyservers and your Git configuration are not changed.
+The script prints the commands for those steps with your values filled in.
+EOF
+}
+
+die() { printf 'gpg-rotate-subkeys: %s\n' "$*" >&2; exit 1; }
+info() { printf '\n==> %s\n' "$*"; }
+
+EXPIRE=1y
+OVERLAP=1d
+PRIMARY_EXPIRE=2y
+IMPORT=""
+ASSUME_YES=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --import) IMPORT=${2:?--import needs a file}; shift 2 ;;
+    --expire) EXPIRE=${2:?--expire needs a period}; shift 2 ;;
+    --overlap) OVERLAP=${2:?--overlap needs a period}; shift 2 ;;
+    --primary-expire) PRIMARY_EXPIRE=${2:?--primary-expire needs a period}; shift 2 ;;
+    -y | --yes) ASSUME_YES=1; shift ;;
+    -h | --help) usage; exit 0 ;;
+    --) shift; break ;;
+    -*) die "unknown option: $1 (see --help)" ;;
+    *) break ;;
+  esac
+done
+[ $# -eq 2 ] || { usage >&2; exit 2; }
+
+FPR=$(printf '%s' "$1" | tr '[:lower:]' '[:upper:]')
+BACKUP_ROOT=$2
+
+command -v gpg >/dev/null 2>&1 || die "gpg not found in PATH"
+case "$FPR" in '' | *[!0-9A-F]*) die "FINGERPRINT must be the full hexadecimal fingerprint" ;; esac
+[ ${#FPR} -eq 40 ] || [ ${#FPR} -eq 64 ] || die "FINGERPRINT must be the full 40 or 64 character fingerprint"
+[ -d "$BACKUP_ROOT" ] && [ -w "$BACKUP_ROOT" ] || die "BACKUP_DIR must be an existing, writable directory: $BACKUP_ROOT"
+[ -z "$IMPORT" ] || [ -r "$IMPORT" ] || die "cannot read $IMPORT"
+gpg --batch --list-keys "$FPR" >/dev/null 2>&1 || die "key $FPR is not in your keyring"
+if [ -t 0 ]; then
+  GPG_TTY=$(tty)
+  export GPG_TTY
+fi
+
+listing() { gpg --batch --with-colons --fixed-list-mode --with-keygrip -K "$FPR" 2>/dev/null; }
+
+# One line per subkey: fingerprint validity capabilities expiry keygrip
+subkeys() {
+  listing | awk -F: '
+    $1=="ssb" {v=($2==""?"-":$2); c=($12==""?"-":$12); x=($7==""?0:$7); want=1; next}
+    $1=="fpr" && want {f=$10; next}
+    $1=="grp" && want {print f, v, c, x, $10; want=0}'
+}
+
+# Field N of the primary key record: 2=validity, 7=expiry, 15=secret status
+primary_field() { listing | awk -F: -v n="$1" '$1=="sec" && !done {print $n; done=1}'; }
+
+fmt_date() {
+  [ "$1" = 0 ] && { echo never; return; }
+  date -r "$1" +%F 2>/dev/null || date -d "@$1" +%F
+}
+
+PRIMARY_SECRET=$(primary_field 15)
+case "$PRIMARY_SECRET" in
+  '+')
+    [ -z "$IMPORT" ] || die "the primary secret key is already on this machine; omit --import"
+    PRIMARY_NOTE="on this machine, left in place" ;;
+  '#' | '')
+    [ -n "$IMPORT" ] || die "the primary secret key is offline (sec#); pass --import with your full secret-key backup"
+    PRIMARY_NOTE="offline, imported from $IMPORT and removed again" ;;
+  *) die "the primary secret key is on a smartcard ($PRIMARY_SECRET); this script doesn't support that" ;;
+esac
+
+# Valid subkeys that sign, encrypt or authenticate are retired; expired or
+# revoked ones are left alone so they don't become valid again.
+RETIRE=""
+SKIP=""
+while read -r f v c _; do
+  case "$c" in *[sea]*) ;; *) continue ;; esac
+  case "$v" in
+    e | r | i | d) SKIP="$SKIP $f" ;;
+    *) RETIRE="$RETIRE $f" ;;
+  esac
+done <<EOF
+$(subkeys)
+EOF
+
+describe() {
+  local f line
+  for f in $1; do
+    line=$(subkeys | awk -v f="$f" '$1==f')
+    set -- $line
+    printf '    %s  [%s]  expires %s\n' "$1" "$3" "$(fmt_date "$4")"
+  done
+}
+
+OUT="$BACKUP_ROOT/gpg-$(printf '%s' "$FPR" | tail -c 16)-$(date +%Y%m%dT%H%M%S)"
+
+printf 'Key:             %s\n' "$FPR"
+printf 'Primary key:     %s\n' "$PRIMARY_NOTE"
+printf 'Primary expires: %s\n' "$(fmt_date "$(primary_field 7 | sed 's/^$/0/')")"
+printf 'New subkeys:     ed25519 sign, cv25519 encr, ed25519 auth, expiring in %s\n' "$EXPIRE"
+printf 'Shorten to %s:\n' "$OVERLAP"
+if [ -n "$RETIRE" ]; then describe "$RETIRE"; else echo "    (none)"; fi
+if [ -n "$SKIP" ]; then
+  echo "Leave alone (expired or revoked):"
+  describe "$SKIP"
+fi
+printf 'Backup:          %s\n' "$OUT"
+
+if [ -z "$ASSUME_YES" ]; then
+  printf '\nContinue? [y/N] '
+  read -r reply
+  case "$reply" in y | Y | yes) ;; *) die "aborted, nothing changed" ;; esac
+fi
+
+mkdir "$OUT" "$OUT/pre-rotation"
+
+IMPORTED=""
+on_exit() {
+  if [ -n "$IMPORTED" ]; then
+    printf '\nWARNING: the primary secret key is still on this machine.\n' >&2
+    printf 'Fix the problem and rerun, or remove it with: gpg --delete-secret-keys "%s!"\n' "$FPR" >&2
+  fi
+}
+trap on_exit EXIT
+
+if [ -n "$IMPORT" ]; then
+  info "Importing the primary secret key"
+  IMPORTED=1
+  gpg --import "$IMPORT"
+  [ "$(primary_field 15)" = "+" ] || die "$IMPORT doesn't contain the primary secret key"
+fi
+
+info "Backing up the current key to $OUT/pre-rotation"
+gpg --armor --output "$OUT/pre-rotation/secret-keys.asc" --export-secret-keys "$FPR"
+gpg --armor --output "$OUT/pre-rotation/public-key.asc" --export "$FPR"
+gpg --export-ownertrust >"$OUT/pre-rotation/ownertrust.txt"
+
+REV="$(gpgconf --list-dirs homedir)/openpgp-revocs.d/$FPR.rev"
+if [ -f "$REV" ]; then
+  cp "$REV" "$OUT/"
+else
+  info "No revocation certificate found; generating one (answer y, reason 0, empty description, y)"
+  gpg --output "$OUT/$FPR.rev" --generate-revocation "$FPR"
+fi
+
+if [ "$(primary_field 2)" = "e" ]; then
+  info "The primary key has expired; extending it by $PRIMARY_EXPIRE"
+  gpg --quick-set-expire "$FPR" "$PRIMARY_EXPIRE"
+fi
+
+add_subkey() {
+  local before f
+  before=" $(subkeys | awk '{print $1}' | tr '\n' ' ')"
+  gpg --quick-add-key "$FPR" "$1" "$2" "$EXPIRE" >&2 || die "adding the $2 subkey failed"
+  for f in $(subkeys | awk '{print $1}'); do
+    case "$before" in *" $f "*) ;; *) echo "$f"; return ;; esac
+  done
+  die "could not find the new $2 subkey"
+}
+
+info "Adding new subkeys"
+NEW_S=$(add_subkey ed25519 sign)
+NEW_E=$(add_subkey cv25519 encr)
+NEW_A=$(add_subkey ed25519 auth)
+
+NEW_MAX=$(subkeys | awk -v s="$NEW_S" -v e="$NEW_E" -v a="$NEW_A" '($1==s||$1==e||$1==a) && $4>m {m=$4} END {print m+0}')
+NEW_MIN=$(subkeys | awk -v s="$NEW_S" -v e="$NEW_E" -v a="$NEW_A" '($1==s||$1==e||$1==a) && (m==""||$4<m) {m=$4} END {print m+0}')
+PRIMARY_EXP=$(primary_field 7)
+if [ -n "$PRIMARY_EXP" ] && [ "$PRIMARY_EXP" -lt "$NEW_MAX" ]; then
+  info "The primary key would expire before the new subkeys; extending it by $PRIMARY_EXPIRE"
+  gpg --quick-set-expire "$FPR" "$PRIMARY_EXPIRE"
+  PRIMARY_EXP=$(primary_field 7)
+  [ -z "$PRIMARY_EXP" ] || [ "$PRIMARY_EXP" -ge "$NEW_MAX" ] || die "--primary-expire $PRIMARY_EXPIRE still ends before the new subkeys"
+fi
+
+if [ -n "$RETIRE" ]; then
+  info "Shortening the old subkeys to $OVERLAP"
+  for f in $RETIRE; do
+    gpg --quick-set-expire "$FPR" "$OVERLAP" "$f"
+  done
+fi
+
+info "Writing the rotated backup to $OUT"
+gpg --armor --output "$OUT/secret-keys.asc" --export-secret-keys "$FPR"
+gpg --armor --output "$OUT/secret-subkeys.asc" --export-secret-subkeys "$FPR"
+gpg --armor --output "$OUT/public-key.asc" --export "$FPR"
+gpg --export-ownertrust >"$OUT/ownertrust.txt"
+gpg --export-ssh-key "$NEW_A!" >"$OUT/id_gpg.pub"
+
+EXPECTED=$(subkeys | wc -l | tr -d ' ')
+BACKED_UP=$(gpg --batch --with-colons --show-keys "$OUT/secret-keys.asc" 2>/dev/null | grep -c '^ssb:' || true)
+[ "$BACKED_UP" = "$EXPECTED" ] || die "the backup holds $BACKED_UP subkeys, the keyring $EXPECTED"
+
+if [ -n "$IMPORTED" ]; then
+  info "Removing the primary secret key again"
+  gpg --batch --yes --delete-secret-keys "$FPR!"
+  [ "$(primary_field 15)" = "#" ] || die "the primary secret key is still present"
+  IMPORTED=""
+fi
+
+info "Checking a signature with the new signing subkey"
+printf 'gpg-rotate-subkeys check\n' | gpg --local-user "$NEW_S!" --clearsign |
+  gpg --batch --status-fd 1 --verify 2>/dev/null | grep "VALIDSIG $NEW_S" >/dev/null ||
+  die "signing with $NEW_S failed"
+
+gpg --list-secret-keys --keyid-format long --with-subkey-fingerprint "$FPR"
+
+OLD_A_GRIPS=""
+for f in $RETIRE; do
+  OLD_A_GRIPS="$OLD_A_GRIPS $(subkeys | awk -v f="$f" '$1==f && $3 ~ /a/ {print $5}')"
+done
+NEW_A_GRIP=$(subkeys | awk -v f="$NEW_A" '$1==f {print $5}')
+REMIND=$((NEW_MIN - 30 * 86400))
+
+cat <<EOF
+
+Done. Store $OUT in your protected offline locations.
+It contains your full secret key: don't leave it on a synced or unencrypted disk.
+
+New subkeys:
+  signing         $NEW_S
+  encryption      $NEW_E
+  authentication  $NEW_A (keygrip $NEW_A_GRIP)
+
+Next steps:
+  git config --global user.signingkey "$NEW_S!"
+EOF
+if [ -n "$(echo $OLD_A_GRIPS)" ]; then
+  for g in $OLD_A_GRIPS; do
+    printf "  awk -v old=%s -v new=%s '\$1==old {\$1=new} {print}' ~/.gnupg/sshcontrol > ~/.gnupg/sshcontrol.new && mv ~/.gnupg/sshcontrol.new ~/.gnupg/sshcontrol\n" "$g" "$NEW_A_GRIP"
+  done
+else
+  printf '  echo %s >> ~/.gnupg/sshcontrol\n' "$NEW_A_GRIP"
+fi
+cat <<EOF
+  gpgconf --kill gpg-agent && gpgconf --launch gpg-agent && ssh-add -L
+  gh gpg-key delete $(printf '%s' "$FPR" | tail -c 16)
+  gh gpg-key add "$OUT/public-key.asc" --title "GPG key"
+  gh ssh-key list    # then: gh ssh-key delete <ID of the old key>
+  gh ssh-key add "$OUT/id_gpg.pub" --title "GPG auth subkey"
+  gpg --keyserver hkps://keys.openpgp.org --send-keys $FPR   # if you published before
+  Import $OUT/secret-subkeys.asc on your other machines.
+  Add a reminder for $(fmt_date "$REMIND"), a month before the new subkeys expire.
+EOF
+if [ "$PRIMARY_SECRET" = "+" ]; then
+  printf '\nThe primary secret key is still on this machine. Take it offline as described in Part 2:\n'
+  printf 'https://marcofranssen.nl/keep-your-primary-gpg-key-offline-part-2\n'
+fi
