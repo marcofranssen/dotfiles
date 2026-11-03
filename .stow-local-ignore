@@ -3,6 +3,7 @@ Makefile
 \.git
 \.gitignore
 \.DS_Store
+\.editoconfig
 
 ^/README.*
 
