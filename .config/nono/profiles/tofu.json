@@ -1,9 +1,19 @@
 {
   "meta": {
     "name": "tofu",
-    "description": "Tofu development environment on macOS (Tofu toolchain, Tofu modules, and TOFU_PATH support)"
+    "description": "OpenTofu on macOS: writable provider cache, tenv usage stamps, temporary provider sockets; Seatbelt keeps credentials.tfrc.json unreadable despite the config-directory bypass"
   },
   "filesystem": {
-    "read": ["~/.terraform.d", "~/.terraform.d/plugin-cache", "~/.tenv"]
-  }
+    "read": ["~/.terraform.d", "~/.tenv"],
+    "allow": ["~/.terraform.d/plugin-cache"],
+    "write": ["~/.tenv/OpenTofu/*/last-use.txt"],
+    "unix_socket_dir": ["$TMPDIR"],
+    "bypass_protection": ["~/.terraform.d", "~/.terraform.d/plugin-cache"]
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(deny file-read* (regex #\"/[.]terraform[.]d/credentials[.]tfrc[.]json$\"))"
+  ]
 }
