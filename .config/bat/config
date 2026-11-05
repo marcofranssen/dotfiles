@@ -1,0 +1,4 @@
+--theme=auto
+--theme-dark="Catppuccin Mocha"
+--theme-light="Catppuccin Latte"
+--style="numbers,changes,header"
